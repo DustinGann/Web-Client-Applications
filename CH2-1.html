@@ -1,0 +1,23 @@
+<body>
+<h1>The Miles Per Gallon Calculator</h1>
+<script>
+"use strict";
+// get miles driven from user
+const miles = parseFloat(prompt("Enter miles driven"));
+const milesCon= (miles.toFixed(2));
+
+// get gallons used from user
+
+const gallons = parseFloat(prompt("Enter gallons of gas used"));
+const gallonsCon= (gallons.toFixed(2));
+// calculate mpg
+
+const mpg = parseFloat(milesCon/gallonsCon);
+const html = `<p><label>Miles: </label>${milesCon}</p>
+<p><label>Gallons: </label>${gallonsCon}</p>
+<p><label>MPG: </label>${mpg.toFixed(2)}</p>`;
+
+
+document.write(html);
+</script>
+</body>
