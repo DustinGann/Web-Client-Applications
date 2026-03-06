@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Future Value Calculator</title>
+    <link rel="stylesheet" href="future_value.css">
+</head>
+<body>
+    <main>
+        <h1>The Future Value Calculator</h1>
+        <div>
+            <label for="investment">Investment amount:</label>
+            <input type="text" id="investment">
+            <span>*</span>
+        </div>
+        <div>
+            <label for="rate">Interest rate:</label>
+            <input type="text" id="rate">
+            <span>*</span>
+        </div>
+        <div>
+            <label for="years">Years:</label>
+            <input type="text" id="years">
+            <span>*</span>
+        </div>
+        <div>
+            <label for="future_value">Future value:</label>
+            <input type="text" id="future_value" disabled>
+        </div>
+        <div>
+            <label>&nbsp;</label>
+            <input type="button" id="calculate" value="Calculate">
+            <input type="button" id="clear" value="Clear">
+        </div>
+        <style>body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    margin: 0 auto;
+    width: 760px;
+    border: 3px solid blue;
+    padding: 0 2em 1em;
+}
+h1 {
+    color: blue;
+}
+div {
+    margin-bottom: 1em;
+}
+label {
+    display: inline-block;
+    width: 10em;
+    text-align: right;
+	margin-right: 0.5em;
+}
+span {
+    color: red;
+    font-size: .8em;
+}</style>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="assets8/js/8scripts1.js"></script>
+</body>
+</html>
