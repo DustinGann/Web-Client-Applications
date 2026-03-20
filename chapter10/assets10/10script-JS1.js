@@ -34,22 +34,24 @@ $(document).ready( () => {
         $("#email_2").val(email2);
         
         // validate the first name entry 
-        const firstName = $("#first_name").trim(); 
-        if (firstName == "") {
-            $("#first_name").next().text("This field is required.");
-            isValid = false;
-        } else {
-            $("#first_name").next().text("");
-        }
-        $("#first_name").val(firstName);
+const firstName = $("#first_name").val().trim();  // added .val()
+if (firstName == "") {
+    $("#first_name").next().text("This field is required.");
+    isValid = false;
+} else {
+    $("#first_name").next().text("");
+}
+$("#first_name").val(firstName);
 
-        // validate the last name entry
-        if ($("#first_name") == "") {
-            $("#last_name").next().text("This field is required.");
-            isValid = false;
-        } else {
-            $("#last_name").next().text("");
-        }
+// validate the last name entry
+const lastName = $("#last_name").val().trim();    // fixed selector + added .val()
+if (lastName == "") {
+    $("#last_name").next().text("This field is required.");
+    isValid = false;
+} else {
+    $("#last_name").next().text("");
+}
+$("#last_name").val(lastName);
 
         // validate the state entry
 		const state = $("#state").val().trim();
@@ -65,11 +67,55 @@ $(document).ready( () => {
 		$("#state").val(state);
 			
 		// validate the zip-code entry
+//////////////////////////////////////////////
+    
+
+        // validate the state entry
+		const zipCode = $("#zip_code").val().trim();
+		if (zipCode == "") {
+			$("#zip_code").next().text("This field is required.");
+			isValid = false;
+            
+		} else if ( zipCode.length <= 4 ) {
+			$("#zip_code").next().text("Use 5-character code.");
+			isValid = false;
+
+        } else if  (isNaN(zipCode)) {
+			$("#zip_code").next().text("Needs to be a number");
+			isValid = false;
+            
+        } else {
+			$("#zip_code").next().text("");
+		}
+		$("#zip_code").val(zipCode);
 			
 		// validate the check boxes	
+
+        
+let wincon = false;
+
+$(":checkbox").each(function(i, val) {
+    
+    if ($(this).is(":checked")) {
+        wincon = true;
+    }
+});
+
+if (wincon == false) {
+    isValid = false;
+    
+    $("#net").next().text("Please select at least one option.");
+} else {
+
+    $("#net").next().text("*");
+}
+
+
+        
 						
 		// prevent the default action of submitting the form if any entries are invalid 
 		if (isValid == false) {
+            evt.preventDefault();
 
 		}
     });
