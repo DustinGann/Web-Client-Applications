@@ -10,6 +10,27 @@ const getRandomNumber = max => {
     return rand;
 };
 
+
+const getDate =() =>{
+
+ const now = new Date();
+ 
+    const isoString = now.toISOString();
+
+
+    const year  = isoString.substring(0, 4);   
+    const month = isoString.substring(5, 7);   
+    const day   = isoString.substring(8, 10); 
+    const hours = isoString.substring(11, 13); 
+    const mins  = isoString.substring(14, 16);
+
+    return `${month}/${day}/${year} at ${hours}:${mins}`;
+}
+
+
+
+
+
 const calculateFutureValue = (investment, rate, years) => {
     let futureValue = investment;
     for (let i = 1; i <= years; i++ ) {
@@ -20,26 +41,50 @@ const calculateFutureValue = (investment, rate, years) => {
 
         }
     }
-
   
-    var futureR = futureValue.toFixed(2);
-    var gg = String(futureValue).indexOf(".");
-    /////////////////////////////////////////////////////////
-    var d = String(futureValue).substring((GG-3), GG)
+   // futureValue = formatFutureValue(futureValue);
+   futureValue = new Intl.NumberFormat("en-US").format(futureValue);
 
-    var d = String(futureValue).substring((GG-3), GG)
-    
+   
 
-    alert(investment +" "+ rate +" "+ years+ " Y "+ gg +" "+ futureR);
-
-    return futureR;
-
-    
+    return futureValue;
 };
 
-const formatFutureValue = (investment, rate, years) => {
+const formatFutureValue = (futureValue) => {
 
+    let futureR = futureValue.toFixed(2);
+    let futRS = futureR.toString();
+
+    let gg = String(futureValue).indexOf(".");
+    ////////////////////////////////////////////////////////
+    /*
+    let d = String(futureValue).substring(gg-3, gg+3);
+
+    let e = String(futureValue).substring(-6, gg-3);
+
+    let f = String(futRS).substring(0, gg-6);
+    */
+    /////
+    let Conawnser = "";
+    Conawnser += "$";
+
+    if (futRS.length > 9)  {
+
+    Conawnser += futRS.substring(0, gg-6);
+    Conawnser += "," ;
+
+    }
+
+    Conawnser += futRS.substring(gg-6, gg-3) ;
+    Conawnser += "," ;
+    Conawnser += futRS.substring(gg-3, gg+3);
+   
+
+   
     
+    alert(Conawnser);
+
+    return Conawnser;
 
 }
 
@@ -89,4 +134,7 @@ $(document).ready( () => {
         }
     });
     $("#investment").focus();
+
+
+    $("#date").text(getDate());
 });
