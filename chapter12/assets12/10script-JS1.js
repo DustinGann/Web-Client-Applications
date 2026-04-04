@@ -20,7 +20,21 @@ const calculateFutureValue = (investment, rate, years) => {
 
         }
     }
-    return futureValue.toFixed(2);
+
+  
+    var futureR = futureValue.toFixed(2);
+    var gg = String(futureValue).indexOf(".");
+    /////////////////////////////////////////////////////////
+    var d = String(futureValue).substring((GG-3), GG)
+
+    var d = String(futureValue).substring((GG-3), GG)
+    
+
+    alert(investment +" "+ rate +" "+ years+ " Y "+ gg +" "+ futureR);
+
+    return futureR;
+
+    
 };
 
 const formatFutureValue = (investment, rate, years) => {
@@ -41,7 +55,7 @@ $(document).ready( () => {
         const rate = getRandomNumber(15);
         const years = getRandomNumber(50);   
 
-        alert(investment +" "+ rate +" "+ years);
+       
 
        
 
