@@ -18,16 +18,25 @@ $( document ).ready( () => {
         $("span").text("");   // clear any previous error messages
         
         // get values entered by user
+        
         const email = $("#email").val();
         const phone = $("#phone").val();
         const zip = $("#zip").val();
         const dob = $("#dob").val();
+        const Credit = $("#card").val();
+        const Expire = $("#cc_date").val();
 
         // regular expressions for validity testing
         const emailPattern = /^[\w\.\-]+@[\w\.\-]+\.[a-zA-Z]+$/;
         const phonePattern = /^\d{3}-\d{3}-\d{4}$/;
         const zipPattern = /^\d{5}(-\d{4})?$/;
         const datePattern = /^[01]?\d\/[0-3]\d\/\d{4}$/;
+
+        const CreditPatters = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+        const ExpirePatters = /^[01]?\d\/[0-3]?\d{3}$/;
+        const ExpirePatters2 = /^[01]?\d\/[0-3]?\d\/\d{4}$/;
+        
+
         
         // check user entries for validity
         let isValid = true;
@@ -43,10 +52,46 @@ $( document ).ready( () => {
             isValid = false;
             $("#zip").next().text("Please enter a valid zip code.");
         }
+
+        if ( Credit === "" || !CreditPatters.test(Credit) ) {
+            isValid = false;
+            $("#card").next().text(" Please enter a credit card number in NNNN-NNNN-NNNN-NNNN format.");
+        }
+
+        let checksScuff=false;
+
+         if ( Expire === "" || (!ExpirePatters.test(Expire) && !ExpirePatters2.test(Expire))  ) {
+            isValid = false;
+            $("#cc_date").next().text(" Please enter a valid date in MM/YYYY or MM/DD/YYYY format.");
+        }
+        else {checksScuff==true}
+
+        if (checksScuff==true){
+            
+            const temp = isDate(Expire);
+
+            if ( temp == false  ) {
+            
+            alert("eeeeeee");
+            isValid = false; 
+            }
+            else{alert("fffff");}
+          
+
+        }
+
+        
+
+
+
+
         if ( dob === "" || !isDate(dob, datePattern) ) {
             isValid = false;
             $("#dob").next().text("Please enter a valid date in MM/DD/YYYY format.");
         }
+
+
+
         
         if ( isValid ) { 
             // code that saves profile info goes here
