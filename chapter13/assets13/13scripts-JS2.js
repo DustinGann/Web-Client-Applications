@@ -4,11 +4,16 @@ const isDate = (date, datePattern) => {
     if (!datePattern.test(date)) { return false; }
 
     const dateParts = date.split("/");
-    const month = parseInt( dateParts[0] );
-    const day = parseInt( dateParts[1] );
+    const month = parseInt(dateParts[0]);
 
-    if ( month < 1 || month > 12 ) { return false; }
-    if ( day > 31 ) { return false; }
+    if (month < 1 || month > 12) { return false; }
+
+    // only check day if there are 3 parts (MM/DD/YYYY)
+    if (dateParts.length === 3) {
+        const day = parseInt(dateParts[1]);
+        if (day > 31) { return false; }
+    }
+
     return true;
 };
 
@@ -33,8 +38,9 @@ $( document ).ready( () => {
         const datePattern = /^[01]?\d\/[0-3]\d\/\d{4}$/;
 
         const CreditPatters = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
-        const ExpirePatters = /^[01]?\d\/[0-3]?\d{3}$/;
-        const ExpirePatters2 = /^[01]?\d\/[0-3]?\d\/\d{4}$/;
+
+        const ExpirePatters  = /^[01]?\d\/\d{4}$/;             // MM/YYYY
+        const ExpirePatters2 = /^[01]?\d\/[0-3]\d\/\d{4}$/; 
         
 
         
@@ -58,27 +64,19 @@ $( document ).ready( () => {
             $("#card").next().text(" Please enter a credit card number in NNNN-NNNN-NNNN-NNNN format.");
         }
 
-        let checksScuff=false;
+        
 
-         if ( Expire === "" || (!ExpirePatters.test(Expire) && !ExpirePatters2.test(Expire))  ) {
-            isValid = false;
-            $("#cc_date").next().text(" Please enter a valid date in MM/YYYY or MM/DD/YYYY format.");
-        }
-        else {checksScuff==true}
-
-        if (checksScuff==true){
-            
-            const temp = isDate(Expire);
-
-            if ( temp == false  ) {
-            
-            alert("eeeeeee");
-            isValid = false; 
-            }
-            else{alert("fffff");}
-          
-
-        }
+        if ( Expire === "" || (!ExpirePatters.test(Expire) && !ExpirePatters2.test(Expire)) ) {
+    isValid = false;
+    $("#cc_date").next().text(" Please enter a valid date in MM/YYYY or MM/DD/YYYY format.");
+} else {
+    const temp = isDate(Expire, ExpirePatters) || isDate(Expire, ExpirePatters2);
+    if (temp == false) {
+        isValid = false;
+        $("#cc_date").next().text(" Please enter a valid date in MM/YYYY or MM/DD/YYYY format.");
+    }
+}
+        
 
         
 
