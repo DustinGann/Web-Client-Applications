@@ -39,7 +39,6 @@ $(document).ready( () => {
         }
         catch(error){
             
-            alert(error.name + ": " + error.message);
 
             
             $("#message").text(error.name + ": " + error.message);
